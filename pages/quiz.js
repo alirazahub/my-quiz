@@ -56,24 +56,37 @@ const Quiz = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div style={{width:"500px",margin:"0 auto"}}>
-      <h1 style={{textAlign:"center"}}>Quiz App</h1>
-      <div style={{}}>Multiple Choice Question</div>
+    <div className="max-w-md mx-auto p-4">
+      <h1 className="text-3xl font-bold mb-4 text-center">Quiz App</h1>
+      <div className="mb-2">Multiple Choice Question (Select only One)</div>
       <Question
         question={currentQuestion}
         selectedAnswer={userAnswers[currentQuestionIndex]}
         onAnswerSelect={handleAnswerSelect}
       />
-      <div>
-        <button onClick={handlePreviousQuestion} disabled={currentQuestionIndex === 0}>
+      <div className="mt-4">
+        <button
+          className="mr-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50"
+          onClick={handlePreviousQuestion}
+          disabled={currentQuestionIndex === 0}
+        >
           Previous
         </button>
-        <button onClick={handleNextQuestion} disabled={currentQuestionIndex === questions.length - 1}>
+        <button
+          className="mr-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded disabled:opacity-50"
+          onClick={handleNextQuestion}
+          disabled={currentQuestionIndex === questions.length - 1}
+        >
           Next
         </button>
-        <button onClick={handleSubmitAnswers}>Submit</button>
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+          onClick={handleSubmitAnswers}
+        >
+          Submit
+        </button>
       </div>
-      {score !== null && <p>Score: {score}</p>}
+      {score !== null && <p className="mt-4 bg-blue-300 p-5 text-center text-white">Score: {score}</p>}
     </div>
   );
 };
@@ -83,7 +96,7 @@ const Question = ({ question, selectedAnswer, onAnswerSelect }) => {
 
   return (
     <div>
-      <h3>{question.question}</h3>
+      <h3 className="text-lg font-bold mb-2">{question.question}</h3>
       {options.map((option, index) => (
         <Option
           key={index}
@@ -98,7 +111,9 @@ const Question = ({ question, selectedAnswer, onAnswerSelect }) => {
 
 const Option = ({ optionText, isSelected, onSelect }) => (
   <div
-    style={{ backgroundColor: isSelected ? 'lightblue' : 'white', cursor: 'pointer' }}
+    className={`p-3 rounded cursor-pointer text-grey ${
+      isSelected ? 'bg-blue-500 text-white' : 'hover:bg-gray-200'
+    }`}
     onClick={onSelect}
   >
     {optionText}
